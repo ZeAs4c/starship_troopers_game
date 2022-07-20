@@ -1,6 +1,8 @@
+import 'dart:isolate';
+
 bool _running = true;
 
-void startLoop() {
+void mainLoop(SendPort sendPort) async {
   final double _fps = 60;
   final double _second = 1000;
   final double _updateTime =
@@ -19,10 +21,12 @@ void startLoop() {
     if (_loopWatch.elapsedMilliseconds > _updateTime) {
       _updates++;
       _loopWatch.reset();
+      sendPort.send(
+          true); // отправляем булевое значение, что нужно обновить виджеты
     }
 
     // Для того чтобы смотреть в консоли ФПС и сколько раз происходят апдейты за 1 секунду
-    if (_timerWatch.elapsedMilliseconds > _updateTime) {
+    if (_timerWatch.elapsedMilliseconds > _second) {
       print("${DateTime.now()} FPS: $_updates");
       _updates = 0;
       _timerWatch.reset();
