@@ -30,6 +30,7 @@ void startLoop() {
   }
 }
 
+// Остановка обновлений
 void stopLoop() {
   _running = false;
 }
