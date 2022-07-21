@@ -1,8 +1,8 @@
 import 'dart:isolate';
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:starship_troopers_game/game_core/main_loop.dart';
-import 'package:starship_troopers_game/utilits/common_vars.dart';
+import 'package:starship_troopers_game/utilits/global_vars.dart';
 
 // Создание класса изменяемых виджетов
 class Game extends StatefulWidget {
@@ -12,36 +12,36 @@ class Game extends StatefulWidget {
 
 // Класс изменения состояний игры
 class _GameState extends State<Game> {
-  double x = 100;
-  double y = 200;
+  final ReceivePort _receivePort =
+      ReceivePort(); // С помощью этой переменной будем принимать данные из мэйн изолята данные, что нам нужно обновиться /Иницилиазация _receivePort
+  late final Isolate
+      _isolateLoop; //late  для того чтобы показать компилятору, что изолят не может принимать значение null и будет позже проинициализирован
 
-  late ReceivePort
-      _receivePort; // С помощью этой переменной будем принимать данные из мэйн изолята данные, что нам нужно обновиться
-  late Isolate _isolateLoop;
-
-  void startIsolateLoop() async {
-    _receivePort = ReceivePort(); // Иницилиазация _receivePort
+  void _startIsolateLoop() async {
     _isolateLoop = await Isolate.spawn(
         mainLoop,
         _receivePort
             .sendPort); // Инициализация Isolate главным изолятом и портом
     _receivePort.listen((message) {
+      GlobalVars.currentScene.update();
       setState(() {});
-      x++;
-      if (x > 500) {
-        x = 0;
-      }
     }); // Принимаем сообщение по порту, что нужно обновиться
+  }
+
+  void initState() {
+    _startIsolateLoop();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _receivePort.close();
+    _isolateLoop.kill();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (isFirstStartGame) {
-      startIsolateLoop();
-      isFirstStartGame = false;
-    }
-    return Stack(children: [
-      Positioned(top: y, left: x, child: Text("sdsd")),
-    ]); //Стек накладывает виджеты в 0-ю точку
+    return GlobalVars.currentScene.buildScene();
   }
 }

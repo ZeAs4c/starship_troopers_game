@@ -18,7 +18,7 @@ void mainLoop(SendPort sendPort) async {
 
   while (_running) {
     // Условие для проверки, если отсчитал больше n миллисикунд - обновляем игру
-    if (_loopWatch.elapsedMilliseconds > _updateTime) {
+    if (_loopWatch.elapsedMilliseconds >= _updateTime) {
       _updates++;
       _loopWatch.reset();
       sendPort.send(
