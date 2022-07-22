@@ -40,11 +40,11 @@ class Player extends Entity {
       return;
     }
     if (isMoveLeft) {
-      _degree -= 5;
+      _degree -= 3.5;
     }
 
     if (isMoveRight) {
-      _degree += 5;
+      _degree += 3.5;
     }
 
     // Переводим радианы в градусы

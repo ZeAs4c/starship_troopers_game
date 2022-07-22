@@ -23,7 +23,8 @@ class _GameState extends State<Game> {
         _receivePort
             .sendPort); // Инициализация Isolate главным изолятом и портом
     _receivePort.listen((message) {
-      GlobalVars.currentScene.update();
+      GlobalVars.gameScene.update();
+
       setState(() {});
     }); // Принимаем сообщение по порту, что нужно обновиться
   }
@@ -42,6 +43,12 @@ class _GameState extends State<Game> {
 
   @override
   Widget build(BuildContext context) {
-    return GlobalVars.currentScene.buildScene();
+    if (GlobalVars.bHomeScene) {
+      return GlobalVars.homeScene.buildScene();
+    } else if (GlobalVars.bGameScene) {
+      return GlobalVars.gameScene.buildScene();
+    } else {
+      return GlobalVars.homeScene.buildScene();
+    }
   }
 }

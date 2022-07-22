@@ -88,6 +88,8 @@ class GameScene extends AppScene {
 
   void _onShoot() {
     _listBullets.add(Bullet(
-        playerAngle: _player.getAngle, playerX: _player.x, playerY: _player.y));
+        playerAngle: _player.getAngle,
+        playerX: _player.x + 18,
+        playerY: _player.y + 18));
   }
 }
