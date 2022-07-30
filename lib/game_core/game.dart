@@ -45,6 +45,8 @@ class _GameState extends State<Game> {
   Widget build(BuildContext context) {
     if (GlobalVars.bHomeScene) {
       return GlobalVars.homeScene.buildScene();
+    } else if (GlobalVars.bSettingsScene) {
+      return GlobalVars.settingScene.buildScene();
     } else if (GlobalVars.bGameScene) {
       return GlobalVars.gameScene.buildScene();
     } else {

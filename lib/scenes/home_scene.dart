@@ -35,6 +35,22 @@ class HomeScene extends AppScene {
                 height: 50,
                 margin: const EdgeInsets.only(left: 0, top: 60),
               ),
+              Container(
+                child: Stack(children: [
+                  const Text("Управление",
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontSize: 40,
+                      )),
+                  GestureDetector(
+                    onTap: _bstarSettings,
+                  ),
+                ]),
+                width: 240,
+                height: 50,
+                //color: Colors.red,
+                margin: const EdgeInsets.only(left: 0, top: 120),
+              ),
             ]),
             padding: const EdgeInsets.only(left: 30, top: 30),
           )),
@@ -49,5 +65,10 @@ class HomeScene extends AppScene {
   void _bstarGame() {
     GlobalVars.bGameScene = true;
     GlobalVars.bHomeScene = false;
+  }
+
+  void _bstarSettings() {
+    GlobalVars.bHomeScene = false;
+    GlobalVars.bSettingsScene = true;
   }
 }
