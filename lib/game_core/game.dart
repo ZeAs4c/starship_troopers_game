@@ -49,6 +49,8 @@ class _GameState extends State<Game> {
       return GlobalVars.settingScene.buildScene();
     } else if (GlobalVars.bGameScene) {
       return GlobalVars.gameScene.buildScene();
+    } else if (GlobalVars.bPauseScene) {
+      return GlobalVars.pauseScene.buildScene();
     } else {
       return GlobalVars.homeScene.buildScene();
     }

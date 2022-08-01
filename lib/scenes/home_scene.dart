@@ -5,7 +5,6 @@ import 'package:starship_troopers_game/scenes/app_scene.dart';
 import 'package:starship_troopers_game/utilits/global_vars.dart';
 
 class HomeScene extends AppScene {
-  Game hh = Game();
   @override
   Widget buildScene() {
     return Stack(children: [
@@ -16,10 +15,13 @@ class HomeScene extends AppScene {
             width: GlobalVars.screenWidth,
             height: GlobalVars.screenHeight,
             child: Stack(children: [
-              const Text(
-                "Звездный десант",
-                style: TextStyle(color: Colors.red, fontSize: 40),
-              ),
+              Align(
+                  alignment: Alignment.topCenter,
+                  child: const Text(
+                    "Звездный десант",
+                    style: TextStyle(color: Colors.red, fontSize: 40),
+                    textAlign: TextAlign.center,
+                  )),
               Container(
                 child: Stack(children: [
                   const Text("Старт",

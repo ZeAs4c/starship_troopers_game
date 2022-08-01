@@ -30,12 +30,36 @@ class GameScene extends AppScene {
         Positioned(
             top: 0,
             left: GlobalVars.screenWidth / 2,
-            child: Container(
-              width: GlobalVars.screenWidth / 2,
-              height: GlobalVars.screenHeight / 2,
-              child: GestureDetector(
-                onTap: _onAcceleration,
-              ),
+            child: Stack(
+              children: [
+                Container(
+                    width: GlobalVars.screenWidth / 2,
+                    height: GlobalVars.screenHeight / 2,
+                    child: Stack(
+                      children: [
+                        GestureDetector(
+                          onTap: _onAcceleration,
+                        ),
+                        Container(
+                          alignment: Alignment.topRight,
+                          child: Container(
+                            child: Stack(children: [
+                              const Icon(
+                                Icons.pause,
+                                size: 50,
+                                color: Colors.red,
+                              ),
+                              GestureDetector(
+                                onTap: _PauseScene,
+                              ),
+                            ]),
+                            width: 50,
+                            height: 50,
+                          ),
+                        )
+                      ],
+                    )),
+              ],
             )),
         Positioned(
             top: GlobalVars.screenHeight / 2,
@@ -91,5 +115,10 @@ class GameScene extends AppScene {
         playerAngle: _player.getAngle,
         playerX: _player.x + 18,
         playerY: _player.y + 18));
+  }
+
+  void _PauseScene() {
+    GlobalVars.bPauseScene = true;
+    GlobalVars.bGameScene = false;
   }
 }
