@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:starship_troopers_game/entities/entity.dart';
 import 'package:starship_troopers_game/utilits/global_vars.dart';
 
@@ -19,10 +19,16 @@ class Player extends Entity {
   double _speed = 2;
 
   get getAngle => _angle;
+  set setAngle(double ang) {
+    this._angle = ang;
+  }
+
+  set setDegree(double deg) {
+    this._degree = deg;
+  }
 
   @override
   Widget build() {
-    // TODO: implement build
     return Positioned(
         top: y,
         left: x,
@@ -68,5 +74,16 @@ class Player extends Entity {
     }
     isMoveLeft = false;
     isMoveRight = false;
+  }
+
+  void reset() {
+    _angle = 0; // Угол
+    _degree = 0; // Градусы
+    isMoveLeft = false;
+    isMoveRight = false;
+    isAcceleration = false;
+    _speed = 2;
+    x = 50;
+    y = 150;
   }
 }

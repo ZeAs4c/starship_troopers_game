@@ -59,4 +59,9 @@ class SettingsScene extends AppScene {
     GlobalVars.bHomeScene = true;
     GlobalVars.bSettingsScene = false;
   }
+
+  @override
+  void reset() {
+    // TODO: implement reset
+  }
 }

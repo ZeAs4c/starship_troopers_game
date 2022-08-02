@@ -67,10 +67,16 @@ class HomeScene extends AppScene {
   void _bstarGame() {
     GlobalVars.bGameScene = true;
     GlobalVars.bHomeScene = false;
+    // GlobalVars.gameScene.reset();
   }
 
   void _bstarSettings() {
     GlobalVars.bHomeScene = false;
     GlobalVars.bSettingsScene = true;
+  }
+
+  @override
+  void reset() {
+    // TODO: implement reset
   }
 }

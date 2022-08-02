@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:starship_troopers_game/entities/player.dart';
 import 'package:starship_troopers_game/scenes/app_scene.dart';
 import 'package:starship_troopers_game/scenes/geme_scene.dart';
 import 'package:starship_troopers_game/scenes/home_scene.dart';
@@ -18,4 +19,5 @@ class GlobalVars {
   static bool bGameScene = false;
   static bool bSettingsScene = false;
   static bool bPauseScene = false;
+  static Player tPlayer = Player();
 }

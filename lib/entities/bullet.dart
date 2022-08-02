@@ -41,4 +41,8 @@ class Bullet extends Entity {
       visible = false;
     }
   }
+
+  void reset() {
+    // TODO: implement reset
+  }
 }
