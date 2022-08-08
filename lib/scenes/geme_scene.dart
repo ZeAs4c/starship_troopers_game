@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:starship_troopers_game/entities/asteroidbig.dart';
+import 'package:starship_troopers_game/entities/explosion.dart';
 import 'package:starship_troopers_game/scenes/app_scene.dart';
 import 'package:starship_troopers_game/utilits/global_vars.dart';
 import 'dart:math';
@@ -14,12 +15,12 @@ class GameScene extends AppScene {
   List<AsteroidBig> _listAsteroidBig = [];
   List<Widget> _listWidgets = [];
   List<Widget> _listWidgetsA = [];
+  //Explosion _explosion = Explosion(asteroidX: asteroidX, asteroidY: asteroidY)
   @override
   Widget buildScene() {
     return Stack(
       children: [
         _player.build(),
-        _asteroidB.build(),
         Positioned(
             top: 0,
             left: 0,
@@ -86,11 +87,15 @@ class GameScene extends AppScene {
 
   @override
   void update() {
-    _asteroidB.update();
     _player.update();
     _listWidgets.clear();
     _listWidgetsA.clear();
+
     _listBullets.removeWhere((element) => !element.visible);
+    if (_listAsteroidBig.length < 5) {
+      _listAsteroidBig.add(AsteroidBig());
+    }
+
     _listBullets.forEach((element) {
       _listWidgets.add(element.build());
       element.update();
@@ -137,13 +142,17 @@ class GameScene extends AppScene {
 
   @override
   void reset() {
-    //_asteroidB.x = 0;
-    //_asteroidB.y = 0;
     _player.x = 50;
     _player.y = 150;
     _startGlobalPosition = 0;
+    _listWidgets.clear();
+    _listWidgetsA.clear();
+    _listAsteroidBig.clear();
+    _listBullets.clear();
     _listBullets = [];
     _listWidgets = [];
+    _listAsteroidBig = [];
+    _listWidgetsA = [];
     _player.isAcceleration = false;
     _player.setDegree = 0;
     _player.setAngle = 0;
